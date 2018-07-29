@@ -22,4 +22,11 @@ public class MessageResource {
 		//return "Hello World in Messenger MessageResource";
 	}
 	
+	@GET
+	@Path("/test")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String test() {
+		return "test";
+	}
+	
 }
