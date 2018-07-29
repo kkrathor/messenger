@@ -18,7 +18,7 @@ public class MessageResource {
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Message> getMessages() {
-		return messageService.getMessages();
+		return messageService.getAllMessages();
 		//return "Hello World in Messenger MessageResource";
 	}
 	
