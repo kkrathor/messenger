@@ -1,7 +1,5 @@
 package io.kkrathore.messenger.model;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -11,17 +9,18 @@ public class Profile {
 	private String profileName;
 	private String firstName;
 	private String lastName; 
-	private Date created;
+//	private Date created;
 	
+	public Profile() {
+	}
 	
 	
 	public Profile(long id, String profileName, String firstName, String lastName) {
-		super();
 		this.id = id;
 		this.profileName = profileName;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.created= new Date();
+//		this.created= new Date();
 	}
 	
 	public long getId() {
@@ -48,11 +47,11 @@ public class Profile {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Date getCreated() {
-		return created;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+//	public Date getCreated() {
+//		return created;
+//	}
+//	public void setCreated(Date created) {
+//		this.created = created;
+//	}
 
 }

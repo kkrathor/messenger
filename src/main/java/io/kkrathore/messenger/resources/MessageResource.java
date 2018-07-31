@@ -16,28 +16,25 @@ import io.kkrathore.messenger.model.Message;
 import io.kkrathore.messenger.service.MessageService;
 
 @Path("/messages")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class MessageResource {
 	
 	MessageService messageService = new MessageService();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Message> getMessages() {
 		return messageService.getAllMessages();
 		//return "Hello World in Messenger MessageResource";
 	}
 	
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message addMessages(Message message) {
 		return messageService.addMessage(message);
 	}
 	
 	@PUT
 	@Path("/{messageId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message updateMessage(@PathParam("messageId") long id,  Message message) {
 		message.setId(id);
 		return messageService.updateMessage(message);
@@ -45,17 +42,13 @@ public class MessageResource {
 	
 	@DELETE
 	@Path("/{messageId}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message deleteMessage(@PathParam("messageId") long id) {
 		return messageService.removeMessage(id);
 	}
 	
-	
 	@GET
 	@Path("/{messageId}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message getMessage(@PathParam("messageId") long id) {
 		return messageService.getMessage(id);
 	}
-	
 }
