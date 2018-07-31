@@ -1,8 +1,11 @@
  package io.kkrathore.messenger.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+
+import org.eclipse.yasson.internal.serializer.CalendarTypeDeserializer;
 
 import io.kkrathore.messenger.database.DatabaseClass;
 import io.kkrathore.messenger.model.Message;
@@ -12,6 +15,25 @@ public class MessageService {
 	
 	private Map<Long, Message> messages =  DatabaseClass.getMessages();
 	
+	public List<Message> getAllMessagesForYear(int year){
+		List<Message> messageList= new ArrayList<Message>();
+		Calendar cal = Calendar.getInstance();
+		
+		for(Message message:messages.values()) {
+			cal.setTime(message.getCreate());
+			if(cal.get(Calendar.YEAR) == year) {
+				messageList.add(message);
+			}
+		}
+		return messageList;
+	}
+	
+	public List<Message> getAllMessagePaginated(int start, int size){
+		List<Message> list = new ArrayList<Message>(messages.values());
+		if(start+size > messages.size()) return new ArrayList<Message>();
+		
+		return list.subList(start, start+size);
+	}
 	
 	public List<Message> getAllMessages(){
 		return new ArrayList<Message>(messages.values());
