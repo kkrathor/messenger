@@ -14,6 +14,7 @@ public class DatabaseClass {
 		public static Map<Long, Message> getMessages() {
 			return messages; 
 		}
+		
 		public static Map<String, Profile> getProfiles() {
 			return profiles;
 		}

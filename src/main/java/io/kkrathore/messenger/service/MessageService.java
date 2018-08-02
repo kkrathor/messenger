@@ -2,18 +2,23 @@
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.eclipse.yasson.internal.serializer.CalendarTypeDeserializer;
 
 import io.kkrathore.messenger.database.DatabaseClass;
+import io.kkrathore.messenger.model.Comment;
 import io.kkrathore.messenger.model.Message;
 
 
 public class MessageService {
 	
 	private Map<Long, Message> messages =  DatabaseClass.getMessages();
+	
 	
 	public List<Message> getAllMessagesForYear(int year){
 		List<Message> messageList= new ArrayList<Message>();
@@ -67,6 +72,8 @@ public class MessageService {
 		messages.put(1L, new Message(1, "Hello World m1!", "kkrathor"));
 		messages.put(2L, new Message(2, "Hello Jersey m2", "kkrathor"));
 	}
+
+
 	
 	
 	
