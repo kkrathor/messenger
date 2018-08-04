@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import io.kkrathore.messenger.model.Message;
 import io.kkrathore.messenger.resources.beans.MessageFilterBean;
@@ -36,8 +38,13 @@ public class MessageResource {
 	}
 	
 	@POST
-	public Message addMessages(Message message) {
-		return messageService.addMessage(message);
+	public Response addMessages(Message message) {
+		Message newMessage = messageService.addMessage(message);
+		return Response.status(Status.CREATED)
+				.entity(newMessage)
+				.build();
+		
+		//return messageService.addMessage(message);
 	}
 	
 	@PUT
