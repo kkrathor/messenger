@@ -61,7 +61,7 @@ public class Message {
 		this.author = author;
 	}
 	
-//	@XmlTransient
+	@XmlTransient
 	public Map<Long, Comment> getComments() {
 		return comments;
 	}
