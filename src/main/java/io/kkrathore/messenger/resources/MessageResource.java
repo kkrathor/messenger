@@ -1,5 +1,7 @@
 package io.kkrathore.messenger.resources;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ws.rs.BeanParam;
@@ -39,12 +41,10 @@ public class MessageResource {
 	}
 	
 	@POST
-	public Response addMessages(Message message) {
+	public Response addMessages(Message message) throws URISyntaxException {
 		Message newMessage = messageService.addMessage(message);
-		
-		return Response.status(Status.CREATED)
+		return Response.created(new URI("/messenger/webapi/messages/" +newMessage.getId()))
 				.entity(newMessage)
-				.header(HttpHeaders.LOCATION, "http://localhost:8080/messenger/webapi/messages")
 				.build();
 		
 		//return messageService.addMessage(message);
