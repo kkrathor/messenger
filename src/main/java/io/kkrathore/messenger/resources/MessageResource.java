@@ -13,10 +13,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import io.kkrathore.messenger.model.Message;
 import io.kkrathore.messenger.resources.beans.MessageFilterBean;
@@ -41,13 +43,16 @@ public class MessageResource {
 	}
 	
 	@POST
-	public Response addMessages(Message message) throws URISyntaxException {
+	public Response addMessages(@Context UriInfo uriInfo,Message message) {
 		Message newMessage = messageService.addMessage(message);
-		return Response.created(new URI("/messenger/webapi/messages/" +newMessage.getId()))
+		
+		String newId = String.valueOf(newMessage.getId());
+		URI uri = uriInfo.getAbsolutePathBuilder().path(newId).build();
+		
+		return Response.created(uri)
 				.entity(newMessage)
 				.build();
 		
-		//return messageService.addMessage(message);
 	}
 	
 	@PUT
