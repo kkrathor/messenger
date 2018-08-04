@@ -7,7 +7,7 @@ import javax.ws.rs.ext.Provider;
 
 import io.kkrathore.messenger.model.ErrorMessage;
 
-
+//@Provider
 public class GenericExceptionMapper  implements ExceptionMapper<Throwable>{
 
 		@Override
