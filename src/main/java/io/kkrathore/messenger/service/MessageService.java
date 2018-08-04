@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import io.kkrathore.messenger.database.DatabaseClass;
+import io.kkrathore.messenger.exceptions.DataNotFoundException;
 import io.kkrathore.messenger.model.Message;
 
 
 public class MessageService {
 	
 	private Map<Long, Message> messages =  DatabaseClass.getMessages();
-	
 	
 	public List<Message> getAllMessagesForYear(int year){
 		List<Message> messageList= new ArrayList<Message>();
@@ -39,7 +39,12 @@ public class MessageService {
 	}
 	
 	public Message getMessage(long id) {
-		return messages.get(id);
+		Message message = messages.get(id);
+		if(message== null) {
+			throw new DataNotFoundException("Data not found for message id : " + id);
+		}
+		return message;
+		
 	}
 	
 	public Message addMessage(Message message) {
